@@ -4,6 +4,7 @@ import {
   getAfterResponseHeaders,
   getBlacklistedHeaders,
 } from '@/utils/headers';
+import { specificProxyRequest } from '@/utils/proxy';
 import {
   createTokenIfNeeded,
   isAllowedToMakeRequest,

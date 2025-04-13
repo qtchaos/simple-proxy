@@ -6,33 +6,31 @@
     "prepare": "nitropack prepare",
     "dev": "nitropack dev",
     "build": "nitropack build",
-    "build:cloudflare": "NITRO_PRESET=cloudflare npm run build",
-    "build:aws": "NITRO_PRESET=aws_lambda npm run build",
-    "build:node": "NITRO_PRESET=node-server npm run build",
-    "build:netlify": "NITRO_PRESET=netlify_edge npm run build",
-    "start": "node .output/server/index.mjs",
+    "build:cloudflare": "NITRO_PRESET=cloudflare bun run build",
+    "build:aws": "NITRO_PRESET=aws_lambda bun run build",
+    "build:node": "NITRO_PRESET=node-server bun run build",
+    "build:netlify": "NITRO_PRESET=netlify_edge bun run build",
+    "start": "bun .output/server/index.mjs",
     "lint": "eslint --ext .ts src/",
-    "lint:fix": "eslint --fix --ext .ts src/",
-    "preinstall": "npx only-allow pnpm"
+    "lint:fix": "eslint --fix --ext .ts src/"
   },
   "dependencies": {
-    "h3": "^1.10.0",
-    "jose": "^5.2.0",
+    "h3": "2.0.0",
+    "jose": "6.0.10",
     "nitropack": "^2.8.1"
   },
   "devDependencies": {
+    "@rollup/wasm-node": "^4.9.4",
+    "@types/node": "^22.14.1",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
     "eslint": "^8.48.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "@rollup/wasm-node": "^4.9.4"
+    "eslint-plugin-prettier": "^5.0.0"
   },
-  "pnpm": {
-    "overrides": {
-      "rollup": "npm:@rollup/wasm-node"
-    }
+  "overrides": {
+    "rollup": "npm:@rollup/wasm-node"
   }
 }
