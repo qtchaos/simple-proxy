@@ -5,6 +5,7 @@ import pkg from "./package.json";
 export default defineNitroConfig({
   noPublicDir: true,
   srcDir: "./src",
+  compatibilityDate: '2025-04-13',
   runtimeConfig: {
     version: pkg.version
   },

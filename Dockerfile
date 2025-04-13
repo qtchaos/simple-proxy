@@ -21,13 +21,17 @@ FROM base AS prerelease
 COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
 
-# copy production dependencies and source code into final image
+# build the project
+FROM prerelease AS build
+RUN bun run build
+
+# copy production dependencies and built files into final image
 FROM base AS release
 COPY --from=install /temp/prod/node_modules node_modules
-COPY --from=prerelease /usr/src/app/index.ts .
+COPY --from=build /usr/src/app/.output ./.output
 COPY --from=prerelease /usr/src/app/package.json .
 
 # run the app
 USER bun
-EXPOSE 80/tcp
-ENTRYPOINT [ "bun", "run", "index.ts" ]
+EXPOSE 3000/tcp
+ENTRYPOINT [ "bun", "run", "start" ]
